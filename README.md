@@ -1,7 +1,6 @@
-[README.md](https://github.com/user-attachments/files/35009948/README.md)
-# Cardini Rangehood → Home Assistant (ESPHome)
+# Push-Button Rangehood → Home Assistant (ESPHome)
 
-Control a push-button **Cardini rangehood** from **Home Assistant** using an ESP8266 (D1 mini) and five **PC817 optocouplers** that "press" the hood's own buttons. This repo includes:
+Control a **push-button rangehood** from **Home Assistant**. It was built and tested on a **Cardini RH9T340**, but the method works on **any rangehood with push buttons**. It does this using an ESP8266 (D1 mini) and five **PC817 optocouplers** that "press" the hood's own buttons. This repo includes:
 - a custom PCB, ready to order
 - a 3D-printable enclosure
 - the ESPHome firmware
@@ -49,13 +48,15 @@ In Home Assistant you get five buttons: **Light, Fan Min, Fan Middle, Fan Max an
 
 ## Will it work on my hood?
 
-This was built on a **Cardini rangehood** (model: _TODO: add model number_). Its button board is marked:
+**Most likely, yes, if your hood has push buttons.** Every push button is just a switch that joins two points when pressed, and this project simply joins them electronically. Only the wiring points (step 5) change from hood to hood.
+
+It was built on a **Cardini RH9T340** rangehood. Its button board is marked:
 - **BW-TX020 / ZD-95(G)F** (made by Changwei)
 - five buttons: **K1 Light, K2 Min, K3 Middle, K4 Max, K5 Power**, each with an LED
 - connector **CON1** (5V, GND, TXD, RXD) to the hood's main board
 - a 3-pin header **CON2** (GND, 5V, DBG)
 
-If your board looks like the photos above, this should work as-is. The same idea works on most hoods with plain tactile buttons on a 5 V board, as long as:
+If your board looks like the photos above, it should work as-is. On any other push-button hood, it works as long as:
 1. you can find **5 V and GND** on the button board to power the ESP, and
 2. each button is a simple switch that joins two points when pressed.
 
@@ -246,7 +247,7 @@ If you'd rather not order PCBs, the same circuit fits on an **ElectroCookie half
 ## Ideas / to do
 
 - [ ] Add photos of the finished PCB and the installed enclosure
-- [ ] Add the Cardini model number
+- [ ] Add a list of other hoods people have got working
 - [ ] A single 3-speed **fan** entity in Home Assistant instead of separate buttons
 - [ ] Read the button LEDs back into Home Assistant so it knows the hood's current state
 

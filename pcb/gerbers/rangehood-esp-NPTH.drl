@@ -1,0 +1,16 @@
+M48
+; NPTH drill file, rangehood ESP board
+; FORMAT={-:-/ absolute / metric / decimal}
+FMAT,2
+METRIC
+T1C3.200
+%
+G90
+G05
+T1
+X4.000Y60.000
+X76.000Y60.000
+X4.000Y76.000
+X76.000Y76.000
+T0
+M30

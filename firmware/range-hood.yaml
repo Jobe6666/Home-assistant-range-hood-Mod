@@ -1,0 +1,92 @@
+esphome:
+  name: range-hood
+  friendly_name: Rangehood
+
+esp8266:
+  board: d1_mini
+
+logger:
+
+# Encryption key + OTA password come from secrets.yaml (see secrets.example.yaml)
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "Rangehood Fallback"
+    password: !secret fallback_ap_password
+
+captive_portal:
+
+# One output per PC817 optocoupler.
+# D3, D4 and D8 are avoided on purpose: they are ESP8266 boot-mode pins.
+output:
+  - platform: gpio
+    pin: D1
+    id: opto_light
+  - platform: gpio
+    pin: D2
+    id: opto_min
+  - platform: gpio
+    pin: D5
+    id: opto_middle
+  - platform: gpio
+    pin: D6
+    id: opto_max
+  - platform: gpio
+    pin: D7
+    id: opto_power
+
+# Each Home Assistant button "presses" the real button for 200 ms.
+# Keep presses short: holding Power for a few seconds locked up our hood's
+# button board until the hood was power-cycled.
+button:
+  - platform: output
+    name: "Light"
+    output: opto_light
+    duration: 200ms
+  - platform: output
+    name: "Fan Min"
+    output: opto_min
+    duration: 200ms
+  - platform: output
+    name: "Fan Middle"
+    output: opto_middle
+    duration: 200ms
+  - platform: output
+    name: "Fan Max"
+    output: opto_max
+    duration: 200ms
+  - platform: output
+    name: "Power"
+    output: opto_power
+    duration: 200ms
+
+# --- DEBUG ONLY -------------------------------------------------------------
+# Uncomment while building/troubleshooting. Each switch holds its optocoupler
+# ON so you can measure voltages with a multimeter. They turn OFF after every
+# restart. Remove them again when finished, and don't leave Power held on.
+#
+# switch:
+#   - platform: output
+#     name: "Light test (hold)"
+#     output: opto_light
+#   - platform: output
+#     name: "Fan Min test (hold)"
+#     output: opto_min
+#   - platform: output
+#     name: "Fan Middle test (hold)"
+#     output: opto_middle
+#   - platform: output
+#     name: "Fan Max test (hold)"
+#     output: opto_max
+#   - platform: output
+#     name: "Power test (hold)"
+#     output: opto_power
