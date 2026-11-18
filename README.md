@@ -244,15 +244,6 @@ If you'd rather not order PCBs, the same circuit fits on an **ElectroCookie half
 
 ---
 
-## Ideas / to do
-
-- [ ] Add photos of the finished PCB and the installed enclosure
-- [ ] Add a list of other hoods people have got working
-- [ ] A single 3-speed **fan** entity in Home Assistant instead of separate buttons
-- [ ] Read the button LEDs back into Home Assistant so it knows the hood's current state
-
----
-
 ## Repo layout
 
 ```
